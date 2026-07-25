@@ -15,9 +15,9 @@ export function NavBar() {
                         About
                     </a>
                     
-                    <a href="/register" className="flex items-center justify-center 
+                    <a href="/login" className="flex items-center justify-center 
                     w-32 h-full text-white hover:bg-gray-600 transition-colors" >
-                        Let's Start
+                        Lets Start
                     </a>
                 </div>
             </nav>

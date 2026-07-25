@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { register } from "../services/register";
+import { useState } from "react"
+import { register } from "../services/register"
 
-function Register() {
+export function Register() {
+    
     const [formData, setFormData] = useState({
         nombre: "",
         primerApellido: "",
@@ -9,14 +10,14 @@ function Register() {
         correo: "",
         telefono: "",
         password: "",
-    });
+    })
 
     const handleChange = ({ target }) => {
         setFormData({
             ...formData,
             [target.name]: target.value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,19 +27,12 @@ function Register() {
 
             console.log(data);
             alert("Usuario registrado");
+            window.location.href = "/login";
 
-            setFormData({
-                nombre: "",
-                primerApellido: "",
-                segundoApellido: "",
-                correo: "",
-                telefono: "",
-                password: "",
-            });
         } catch (error) {
             alert(error.message);
         }
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
@@ -103,7 +97,5 @@ function Register() {
                 Register
             </button>
         </form>
-    );
+    )
 }
-
-export default Register;
