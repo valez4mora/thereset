@@ -1,55 +1,75 @@
 import { useState } from "react"
 import { login } from "../services/login"
 
+import { FormInput } from "../components/FormInput"
+
+import {
+    IconMail,
+    IconLock,
+} from "@tabler/icons-react"
+
+
 export function Login() {
+
     const [formData, setFormData] = useState({
         correo: "",
         password: "",
-    });
+    })
+
 
     const handleChange = ({ target }) => {
         setFormData({
             ...formData,
             [target.name]: target.value,
-        });
-    };
+        })
+    }
+
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         try {
-            const data = await login(formData);
+            const data = await login(formData)
 
-            console.log(data);
-            alert("Inicio Exitoso");
-            window.location.href = "/";
+            console.log(data)
+            alert("Inicio Exitoso")
+
+            window.location.href = "/"
 
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         }
     }
 
+
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
+            <form
+                onSubmit={handleSubmit}
+                className="space-y-4 max-w-md mx-auto"
+            >
 
-                <input
-                    type="email"
+                <FormInput
                     name="correo"
+                    label="E-Mail"
                     placeholder="E-Mail"
+                    type="email"
                     value={formData.correo}
                     onChange={handleChange}
-                    className="border p-2 w-full"
+                    icon={<IconMail className="size-4" />}
                 />
 
-                <input
-                    type="password"
+
+                <FormInput
                     name="password"
+                    label="Password"
                     placeholder="Password"
+                    type="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="border p-2 w-full"
+                    icon={<IconLock className="size-4" />}
                 />
+
 
                 <button
                     type="submit"
@@ -57,8 +77,15 @@ export function Login() {
                 >
                     Login
                 </button>
+
             </form>
-            <p>Dont have an account? <a href="/register">Register</a></p>
+
+            <p className="text-center mt-4">
+                Dont have an account?{" "}
+                <a href="/register">
+                    Register
+                </a>
+            </p>
         </>
     )
 }

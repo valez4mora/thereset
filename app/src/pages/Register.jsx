@@ -1,8 +1,18 @@
 import { useState } from "react"
 import { register } from "../services/register"
 
+import { FormInput } from "../components/FormInput"
+
+import {
+    IconUser,
+    IconMail,
+    IconPhone,
+    IconLock,
+} from "@tabler/icons-react"
+
+
 export function Register() {
-    
+
     const [formData, setFormData] = useState({
         nombre: "",
         primerApellido: "",
@@ -12,6 +22,7 @@ export function Register() {
         password: "",
     })
 
+
     const handleChange = ({ target }) => {
         setFormData({
             ...formData,
@@ -19,76 +30,92 @@ export function Register() {
         })
     }
 
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         try {
-            const data = await register(formData);
+            const data = await register(formData)
 
-            console.log(data);
-            alert("Usuario registrado");
-            window.location.href = "/login";
+            console.log(data)
+            alert("Usuario registrado")
+
+            window.location.href = "/login"
 
         } catch (error) {
-            alert(error.message);
+            alert(error.message)
         }
     }
 
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
-            <input
-                type="text"
+        <form
+            onSubmit={handleSubmit}
+            className="space-y-4 max-w-md mx-auto"
+        >
+
+            <FormInput
                 name="nombre"
+                label="Name"
                 placeholder="Name"
                 value={formData.nombre}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconUser className="size-4" />}
             />
 
-            <input
-                type="text"
+
+            <FormInput
                 name="primerApellido"
+                label="First Surname"
                 placeholder="First Surname"
                 value={formData.primerApellido}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconUser className="size-4" />}
             />
 
-            <input
-                type="text"
+
+            <FormInput
                 name="segundoApellido"
+                label="Second Surname"
                 placeholder="Second Surname"
                 value={formData.segundoApellido}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconUser className="size-4" />}
             />
 
-            <input
-                type="email"
+
+            <FormInput
                 name="correo"
+                label="E-Mail"
                 placeholder="E-Mail"
+                type="email"
                 value={formData.correo}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconMail className="size-4" />}
             />
 
-            <input
-                type="text"
+
+            <FormInput
                 name="telefono"
+                label="Phone Number"
                 placeholder="Phone Number"
+                type="tel"
                 value={formData.telefono}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconPhone className="size-4" />}
             />
 
-            <input
-                type="password"
+
+            <FormInput
                 name="password"
+                label="Password"
                 placeholder="Password"
+                type="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="border p-2 w-full"
+                icon={<IconLock className="size-4" />}
             />
+
 
             <button
                 type="submit"
@@ -96,6 +123,7 @@ export function Register() {
             >
                 Register
             </button>
+
         </form>
     )
 }
