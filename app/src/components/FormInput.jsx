@@ -20,7 +20,7 @@ export function FormInput({
     const id = useId()
 
     return (
-        <div className="w-full space-y-2">
+        <div className="w-full space-y-2 mt-4">
             <Label htmlFor={id}>
                 {label}
             </Label>

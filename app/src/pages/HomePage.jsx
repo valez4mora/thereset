@@ -1,8 +1,86 @@
-export function HomePage(){
-    return(
-        <section>
-            <h2 className="text-black">hol</h2>
-            <p>Bienvenido </p>
-        </section>
-    )
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Sparkles, HeartHandshake, Leaf } from "lucide-react";
+
+export function HomePage() {
+    return (
+        <main className="min-h-screen bg-gradient-to-b from-rose-50 to-white">
+            <section className="container mx-auto flex min-h-[80vh] items-center px-6">
+                <div className="max-w-2xl space-y-6">
+                    
+                    <div className="mb-4">
+                        <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-medium text-black">
+                            Wellness ~ Relaxation ~ Beauty
+                        </span>
+                    </div>
+
+                    <h1 className="text-5xl font-bold  text-gray-900 md:text-6xl">
+                        Your Moment of Peace Starts Here
+                    </h1>
+
+                    <p className="text-lg text-gray-600">
+                        Enjoy relaxing massages, facial treatments, and wellness experiences
+                        designed to renew your body and mind.
+                    </p>
+
+                    <div className="flex gap-4">
+                        <Button size="lg">
+                            Book an Appointment
+                        </Button>
+
+                        <Button variant="outline" size="lg">
+                            Explore Services
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            <section className="container mx-auto grid gap-6 px-6 pb-20 md:grid-cols-3">
+                <Card>
+                    <CardContent className="space-y-3 p-6">
+                        <Sparkles className="h-8 w-8 text-rose-500" />
+
+                        <h3 className="text-lg font-semibold">
+                            Premium Treatments
+                        </h3>
+
+                        <p className="text-sm text-gray-600">
+                            High-quality products and personalized treatments for healthy,
+                            radiant skin.
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardContent className="space-y-3 p-6">
+                        <Leaf className="h-8 w-8 text-green-500" />
+
+                        <h3 className="text-lg font-semibold">
+                            Natural Environment
+                        </h3>
+
+                        <p className="text-sm text-gray-600">
+                            A peaceful space created to help you disconnect from everyday
+                            stress.
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardContent className="space-y-3 p-6">
+                        <HeartHandshake className="h-8 w-8 text-pink-500" />
+
+                        <h3 className="text-lg font-semibold">
+                            Personalized Care
+                        </h3>
+
+                        <p className="text-sm text-gray-600">
+                            Every treatment is tailored to your unique needs and wellness
+                            goals.
+                        </p>
+                    </CardContent>
+                </Card>
+            </section>
+        </main>
+    );
 }
