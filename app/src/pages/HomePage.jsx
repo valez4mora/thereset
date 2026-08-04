@@ -4,7 +4,7 @@ import { Sparkles, HeartHandshake, Leaf } from "lucide-react";
 
 export function HomePage() {
     return (
-        <main className="min-h-screen bg-gradient-to-b from-rose-50 to-white">
+        <main className="min-h-screen bg-gray-100">
             <section className="container mx-auto flex min-h-[80vh] items-center px-6">
                 <div className="max-w-2xl space-y-6">
                     
