@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { loginService } from "../services/loginService"
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 import { FormInput } from "@/components/FormInput"
 
@@ -11,12 +12,13 @@ import {
 
 
 export function LoginPage() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const [formData, setFormData] = useState({
         correo: "",
         password: "",
     })
-
 
     const handleChange = ({ target }) => {
         setFormData({
@@ -25,37 +27,28 @@ export function LoginPage() {
         })
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const data = await loginService(formData)
-
-            console.log(data)
-            alert("Inicio Exitoso")
-
-            window.location.href = "/"
-
+            await login(formData);
+            navigate("/", { replace: true });
         } catch (error) {
             alert(error.message)
         }
     }
 
-
     return (
         <section className="min-h-screen flex items-center justify-center">
             <section className="bg-gray-100 w-130 h-140 flex flex-col justify-center space-y-6 px-8 rounded-lg">
 
-                <form
-                    onSubmit={handleSubmit}
-                    className="w-full"
-                >
+                <form onSubmit={handleSubmit} className="w-full">
                     <div className="flex justify-center">
                         <IconUser className="size-10" />
                     </div>
 
-                    <h1 className="text-5xl font-light  text-gray-900 md:text-2xl text-center">Login</h1>
+                    <h1 className="text-5xl font-light text-gray-900 md:text-2xl text-center">Login</h1>
+
                     <FormInput
                         name="correo"
                         label="E-Mail"
@@ -73,7 +66,7 @@ export function LoginPage() {
                         type="password"
                         value={formData.password}
                         onChange={handleChange}
-                        icon={<IconLock className="size-4 " />}
+                        icon={<IconLock className="size-4" />}
                     />
 
                     <button
@@ -85,9 +78,8 @@ export function LoginPage() {
                 </form>
 
                 <p className="text-center mt-4">
-                    Don't have an account?{" "}
-                    <a 
-                    href="/register" className="text-blue-500 hover:underline">
+                    Don&apos;t have an account?{" "}
+                    <a href="/register" className="text-blue-500 hover:underline">
                         Register
                     </a>
                 </p>

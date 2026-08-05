@@ -9,13 +9,14 @@ import {
 
 import { Label } from "@/components/ui/label"
 
-
 export function FormInput({
     label,
     placeholder,
     name,
     type = "text",
     icon,
+    value,
+    onChange,
 }) {
     const id = useId()
 
@@ -37,12 +38,13 @@ export function FormInput({
                     name={name}
                     type={type}
                     placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
                 />
             </InputGroup>
         </div>
     )
 }
-
 
 FormInput.propTypes = {
     label: PropTypes.string.isRequired,
@@ -50,4 +52,6 @@ FormInput.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
     icon: PropTypes.node,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
 }

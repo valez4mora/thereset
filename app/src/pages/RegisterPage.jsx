@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { registerService } from "../services/registerService"
-
+import { useNavigate } from "react-router-dom";
 import { FormInput } from "../components/FormInput"
 
 import {
@@ -12,7 +12,7 @@ import {
 
 
 export function RegisterPage() {
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         nombre: "",
         primerApellido: "",
@@ -35,12 +35,13 @@ export function RegisterPage() {
         e.preventDefault()
 
         try {
-            const data = await registerService(formData)
+            const data = await registerService(formData);
 
-            console.log(data)
-            alert("Usuario registrado")
+            console.log(data);
+            alert("Registro Exitoso");
 
-            window.location.href = "/login"
+            navigate("/login", { replace: true });
+
 
         } catch (error) {
             alert(error.message)

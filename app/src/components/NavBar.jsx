@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export function NavBar() {
     return (
         <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-900">
@@ -7,26 +9,26 @@ export function NavBar() {
                 </a>
 
                 <div className="flex items-center gap-2">
-                    <a
-                        href="/"
+                    <NavLink
+                        to={"/"}
                         className="rounded-md px-4 py-2 text-gray-300 transition hover:bg-gray-800 hover:text-white"
                     >
                         Home
-                    </a>
+                    </NavLink>
 
-                    <a
-                        href="/about"
+                    <NavLink
+                        to={"/about"}
                         className="rounded-md px-4 py-2 text-gray-300 transition hover:bg-gray-800 hover:text-white"
                     >
                         About
-                    </a>
+                    </NavLink>
 
-                    <a
-                        href="/login"
-                        className="ml-2 rounded-md bg-gray-600 px-5 py-2 font-medium text-white transition hover:bg-blue-700"
+                    <NavLink
+                        to={"/login"}
+                        className="ml-2 rounded-md bg-gray-600 px-5 py-2 font-medium text-white transition hover:bg-gray-700"
                     >
                         Let's Start
-                    </a>
+                    </NavLink>
                 </div>
             </nav>
         </header>

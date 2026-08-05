@@ -2,6 +2,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, HeartHandshake, Leaf, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function HomePage() {
     return (
@@ -24,13 +25,18 @@ export function HomePage() {
                     </p>
 
                     <div className="flex gap-4">
+
                         <Button size="lg">
                             Book an Appointment
                         </Button>
 
-                        <Button variant="outline" size="lg">
-                            Explore Services
+                        <Button asChild size="lg" variant="outline" className="rounded-full">
+                            <Link to="/serviceslist">
+                                Explore Services
+                            </Link>
                         </Button>
+
+
                     </div>
                 </section>
 

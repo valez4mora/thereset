@@ -16,5 +16,7 @@ export const loginService = async (userData) => {
         throw new Error(data.message || "Error al inciar")
     }
 
+    localStorage.setItem("token", data.token)
+    
     return data
 }

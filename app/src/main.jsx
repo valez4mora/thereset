@@ -6,18 +6,37 @@ import App from './App.jsx'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { ServicesListPage } from './pages/ServicesListPage'
+import { AuthProvider } from './context/AuthProvider'
+import { RedirectIfAuthenticated } from './routes/RedirectIfAuthenticated'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<App />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/register" element={<RegisterPage/>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<App />}>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/login"
+              element={
+                <RedirectIfAuthenticated>
+                  <LoginPage />
+                </RedirectIfAuthenticated>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RedirectIfAuthenticated>
+                  <RegisterPage />
+                </RedirectIfAuthenticated>
+              }
+            />
+            <Route path="/serviceslist" element={<ServicesListPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )
