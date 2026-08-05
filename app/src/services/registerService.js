@@ -1,8 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL
 
 console.log("API:", API_URL)
-export const login = async (userData) => {
-    const response = await fetch(`${API_URL}/usuarios/login`, {
+export const registerService = async (userData) => {
+    const response = await fetch(`${API_URL}/usuarios/registro`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -13,8 +13,8 @@ export const login = async (userData) => {
     const data = await response.json()
 
     if (!response.ok) {
-        throw new Error(data.message || "Error al inciar")
+        throw new Error(data.message || "Error al registrar")
     }
 
     return data
-}
+};

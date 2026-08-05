@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { login } from "../services/login"
+import { loginService } from "../services/loginService"
 
 import { FormInput } from "@/components/FormInput"
 
@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react"
 
 
-export function Login() {
+export function LoginPage() {
 
     const [formData, setFormData] = useState({
         correo: "",
@@ -30,7 +30,7 @@ export function Login() {
         e.preventDefault()
 
         try {
-            const data = await login(formData)
+            const data = await loginService(formData)
 
             console.log(data)
             alert("Inicio Exitoso")
@@ -45,14 +45,14 @@ export function Login() {
 
     return (
         <section className="min-h-screen flex items-center justify-center">
-            <section className="bg-gray-100 w-80 h-80 flex flex-col justify-center space-y-4 px-4 rounded-lg">
+            <section className="bg-gray-100 w-130 h-140 flex flex-col justify-center space-y-6 px-8 rounded-lg">
 
                 <form
                     onSubmit={handleSubmit}
-                    className=""
+                    className="w-full"
                 >
                     <div className="flex justify-center">
-                        <IconUser />
+                        <IconUser className="size-10" />
                     </div>
 
                     <h1 className="text-5xl font-light  text-gray-900 md:text-2xl text-center">Login</h1>
@@ -86,7 +86,8 @@ export function Login() {
 
                 <p className="text-center mt-4">
                     Don't have an account?{" "}
-                    <a href="/register">
+                    <a 
+                    href="/register" className="text-blue-500 hover:underline">
                         Register
                     </a>
                 </p>

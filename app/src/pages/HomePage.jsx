@@ -1,26 +1,26 @@
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, HeartHandshake, Leaf } from "lucide-react";
+import { Sparkles, HeartHandshake, Leaf, Star } from "lucide-react";
 
 export function HomePage() {
     return (
         <main className="min-h-screen bg-gray-100">
-            <section className="container mx-auto flex min-h-[80vh] items-center px-6">
-                <div className="max-w-2xl space-y-6">
-                    
-                    <div className="mb-4">
-                        <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-medium text-black">
+            <section className="container mx-auto grid min-h-[80vh] items-center gap-12 px-6 lg:grid-cols-2">
+                <section className="max-w-2xl space-y-6">
+                    <div>
+                        <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-medium">
                             Wellness ~ Relaxation ~ Beauty
                         </span>
                     </div>
 
-                    <h1 className="text-5xl font-bold  text-gray-900 md:text-6xl">
+                    <h1 className="text-5xl font-bold text-gray-900 md:text-6xl">
                         Your Moment of Peace Starts Here
                     </h1>
 
                     <p className="text-lg text-gray-600">
-                        Enjoy relaxing massages, facial treatments, and wellness experiences
-                        designed to renew your body and mind.
+                        Enjoy relaxing massages, facial treatments, and wellness
+                        experiences designed to renew your body and mind.
                     </p>
 
                     <div className="flex gap-4">
@@ -32,8 +32,22 @@ export function HomePage() {
                             Explore Services
                         </Button>
                     </div>
+                </section>
+
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                    <HeroCarousel />
+
+                    <Card className="absolute bottom-6 left-6 backdrop-blur bg-white/70 border-none shadow-lg">
+                        <CardContent className="p-4">
+                            <p className="font-semibold">+500 Happy Clients</p>
+                            <p className="flex items-center gap-1 text-sm">
+                                Rated 4.9/5 <Star className="size-4 text-black fill-amber-400" />
+                            </p>
+                        </CardContent>
+                    </Card>
                 </div>
             </section>
+
 
             <section className="container mx-auto grid gap-6 px-6 pb-20 md:grid-cols-3">
                 <Card>
