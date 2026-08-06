@@ -6,20 +6,20 @@ import { Link } from "react-router-dom";
 
 export function HomePage() {
     return (
-        <main className="min-h-screen bg-gray-100">
+        <main className="min-h-screen bg-[#F4EEB]">
             <section className="container mx-auto grid min-h-[80vh] items-center gap-12 px-6 lg:grid-cols-2">
                 <section className="max-w-2xl space-y-6">
                     <div>
-                        <span className="rounded-full bg-rose-100 px-4 py-2 text-sm font-medium">
+                        <span className="rounded-full bg-[#877E5F] px-4 py-2 text-sm font-medium">
                             Wellness ~ Relaxation ~ Beauty
                         </span>
                     </div>
 
-                    <h1 className="text-5xl font-bold text-gray-900 md:text-6xl">
+                    <h1 className="text-5xl font-bold text-[#444413] md:text-6xl">
                         Your Moment of Peace Starts Here
                     </h1>
 
-                    <p className="text-lg text-gray-600">
+                    <p className="text-lg text-[#656352]">
                         Enjoy relaxing massages, facial treatments, and wellness
                         experiences designed to renew your body and mind.
                     </p>
