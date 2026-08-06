@@ -10,7 +10,7 @@ export function HomePage() {
             <section className="container mx-auto grid min-h-[80vh] items-center gap-12 px-6 lg:grid-cols-2">
                 <section className="max-w-2xl space-y-6">
                     <div>
-                        <span className="rounded-full bg-[#877E5F] px-4 py-2 text-sm font-medium">
+                        <span className="rounded-full bg-[#E1DBB5] px-4 py-2 text-sm font-medium">
                             Wellness ~ Relaxation ~ Beauty
                         </span>
                     </div>
