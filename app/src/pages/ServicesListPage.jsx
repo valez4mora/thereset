@@ -12,13 +12,15 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { useAuth } from "@/hooks/useAuth";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
+import { SearchInput } from "@/components/SearchInput";
 
 export function ServicesListPage() {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [sortBy, setSortBy] = useState("nombre");
+    const [sortBy, setSortBy] = useState("");
+    const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -30,7 +32,7 @@ export function ServicesListPage() {
             try {
                 setLoading(true);
                 const response = await servicesService();
-                if (isMounted) setServices(response.data);
+                if (isMounted) setServices(response.data ?? []);
             } catch (err) {
                 if (isMounted) setError(err.message);
             } finally {
@@ -44,40 +46,56 @@ export function ServicesListPage() {
         };
     }, []);
 
-    const sortedServices = useMemo(() => {
-        const copy = [...services];
+    const filteredAndSortedServices = useMemo(() => {
+        if (!Array.isArray(services)) return [];
+
+        const term = search.trim().toLowerCase();
+
+        const filtered = term
+            ? services.filter((s) => s.nombre.toLowerCase().includes(term))
+            : services;
+
+        const copyFiltered = [...filtered];
+
         switch (sortBy) {
             case "precio":
-                return copy.sort((a, b) => Number(a.precioBase) - Number(b.precioBase));
+                return copyFiltered.sort((a, b) => Number(a.precioBase) - Number(b.precioBase));
             case "duracion":
-                return copy.sort((a, b) => a.duracionMinutos - b.duracionMinutos);
-            case "nombre":
+                return copyFiltered.sort((a, b) => a.duracionMinutos - b.duracionMinutos);
             default:
-                return copy.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                return copyFiltered;
         }
-    }, [services, sortBy]);
+    }, [services, sortBy, search]);
 
     return (
         <div className="space-y-6">
-            <div className="flex items-center justify-between flex-wrap gap-3">
-                <h1 className="text-2xl font-semibold">Servicios</h1>
+            <div className="flex flex-col gap-3">
+                <h1 className="text-2xl font-semibold">Services</h1>
 
-                <div className="flex items-center gap-3">
-                    <Select value={sortBy} onValueChange={setSortBy}>
+                <div className="flex items-center gap-3 flex-wrap">
+                    <SearchInput
+                        name="search"
+                        placeholder="Search Service..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        icon={<Search className="size-4" />}
+                    />
+
+                    <Select value={sortBy} onValueChange={setSortBy} className="h-12">
                         <SelectTrigger className="w-40">
-                            <SelectValue placeholder="Ordenar por" />
+                            <SelectValue placeholder="Order by.." />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="nombre">Nombre</SelectItem>
-                            <SelectItem value="precio">Precio</SelectItem>
-                            <SelectItem value="duracion">Duración</SelectItem>
+                            <SelectItem value="">Order by..</SelectItem>
+                            <SelectItem value="precio">Price</SelectItem>
+                            <SelectItem value="duracion">Duration</SelectItem>
                         </SelectContent>
                     </Select>
 
                     {user?.role === "Administrador" && (
                         <Button onClick={() => navigate("/servicios/crear")}>
                             <Plus className="size-4 mr-1" />
-                            Nuevo servicio
+                            New service
                         </Button>
                     )}
                 </div>
@@ -98,15 +116,17 @@ export function ServicesListPage() {
                 </div>
             )}
 
-            {!loading && !error && sortedServices.length === 0 && (
+            {!loading && !error && filteredAndSortedServices.length === 0 && (
                 <div className="text-center py-10 text-muted-foreground">
-                    No hay servicios registrados.
+                    {search
+                        ? `No services were found for "${search}".`
+                        : "No services are registered."}
                 </div>
             )}
 
-            {!loading && !error && sortedServices.length > 0 && (
+            {!loading && !error && filteredAndSortedServices.length > 0 && (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {sortedServices.map((service) => (
+                    {filteredAndSortedServices.map((service) => (
                         <ServiceCard key={service.id} service={service} />
                     ))}
                 </div>
